@@ -1,0 +1,43 @@
+services:
+  web:
+    image: odoo:18.0
+    container_name: odoo18
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      # Custom addons
+      - ./addons:/mnt/extra-addons
+
+      # Config file
+      - ./config:/etc/odoo
+
+      # Persistent Odoo data
+      - odoo-web-data:/var/lib/odoo
+
+      # Optional log folder
+      - ./logs:/var/log/odoo
+
+    restart: unless-stopped
+
+  db:
+    image: postgres:15
+    container_name: postgres15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      # Persistent PostgreSQL data
+      - odoo-db-data:/var/lib/postgresql/data
+
+    restart: unless-stopped
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
