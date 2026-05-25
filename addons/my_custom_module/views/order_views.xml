@@ -6,13 +6,12 @@
         <field name="name">custom.order.tree</field>
         <field name="model">custom.order</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="customer_name"/>
                 <field name="order_date"/>
                 <field name="amount"/>
-                <field name="state"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -28,20 +27,7 @@
                         <field name="customer_name"/>
                         <field name="order_date"/>
                         <field name="amount"/>
-                        <field name="state"/>
                     </group>
-
-                    <footer>
-                        <button name="action_confirm"
-                                string="Confirm"
-                                type="object"
-                                class="btn-primary"/>
-
-                        <button name="action_done"
-                                string="Done"
-                                type="object"
-                                class="btn-success"/>
-                    </footer>
                 </sheet>
             </form>
         </field>
@@ -51,16 +37,19 @@
     <record id="action_custom_order" model="ir.actions.act_window">
         <field name="name">Orders</field>
         <field name="res_model">custom.order</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
-    <!-- Menu -->
+    <!-- Root Menu -->
     <menuitem id="menu_custom_root"
-              name="Custom Order"/>
+              name="My Custom Module"
+              sequence="10"/>
 
+    <!-- Child Menu -->
     <menuitem id="menu_custom_order"
               name="Orders"
               parent="menu_custom_root"
-              action="action_custom_order"/>
+              action="action_custom_order"
+              sequence="1"/>
 
 </odoo>
