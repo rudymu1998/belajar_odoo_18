@@ -5,6 +5,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/order_views.xml',
+        'views/item_views.xml',
     ],
     'installable': True,
     'application': True,
