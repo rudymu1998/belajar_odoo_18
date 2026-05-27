@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 class CustomOrderLine(models.Model):
     _name = 'custom.order.line'
@@ -22,3 +22,20 @@ class CustomOrderLine(models.Model):
     price = fields.Float(
         string="Price"
     )
+
+    subtotal = fields.Float(
+        string="Subtotal",
+        compute="_compute_subtotal",
+        store=True
+    )
+
+    @api.depends('qty', 'price')
+    def _compute_subtotal(self):
+        for record in self:
+            record.subtotal = record.qty * record.price 
+
+    @api.onchange('item_id')
+    def _onchange_item_id(self):
+        for rec in self:
+            if rec.item_id:
+                rec.price = rec.item_id.price

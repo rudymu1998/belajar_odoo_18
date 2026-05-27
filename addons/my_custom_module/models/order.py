@@ -5,17 +5,31 @@ class CustomOrder(models.Model):
     _name = 'custom.order'
     _description = 'Custom Order'
 
-    name = fields.Char(string='Order Number', default='xxxxxxxxxxx', readonly= True)
-    customer_name = fields.Char(string='Customer')
-    order_date = fields.Date(string='Order Date')
-    amount = fields.Float(string='Total Amount' ,readonly= True)
-
-    state = fields.Selection([
-        ('draft', 'Draft'),
+    name = fields.Char(
+        string='Order Number', 
+        default='xxxxxxxxxxx', 
+        readonly= True
+    )
+    customer_name = fields.Char(
+        string='Customer'
+    )
+    order_date = fields.Date(
+        string='Order Date'
+    )
+    amount = fields.Float(
+        string='Total Amount',
+        compute='_compute_amount',
+        store=True,
+        readonly= True
+    )
+    state = fields.Selection(
+        [('draft', 'Draft'),
         ('confirm', 'Confirmed'),
-        ('done', 'Done')
-    ], default='draft', string='Status', required=True)
-
+        ('done', 'Done')], 
+        default='draft', 
+        string='Status', 
+        required=True
+    )
     line_ids = fields.One2many(
         'custom.order.line',
         'order_id',
@@ -27,6 +41,11 @@ class CustomOrder(models.Model):
 
     def action_done(self):
         self.state = 'done'
+
+    @api.depends('line_ids.subtotal')
+    def _compute_amount(self):
+        for rec in self:
+            rec.amount = sum(rec.line_ids.mapped('subtotal'))
 
     @api.model
     def create(self, vals):
