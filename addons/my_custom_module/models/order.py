@@ -37,7 +37,25 @@ class CustomOrder(models.Model):
     )
 
     def action_confirm(self):
-        self.state = 'confirm'
+        print("Confirming order...")
+        for rec in self:
+
+            for line in rec.line_ids:
+
+                item = line.item_id
+
+                # kurangi stock
+                item.qty -= line.qty
+
+                # create transaction
+                self.env['custom.item.transaction'].create({
+                    'item_id': item.id,
+                    'order_id': rec.id,
+                    'qty_taken': line.qty,
+                    'balance_qty': item.qty
+                })
+
+            rec.state = 'confirm'
 
     def action_done(self):
         self.state = 'done'

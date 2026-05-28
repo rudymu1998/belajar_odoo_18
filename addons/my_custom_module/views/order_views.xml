@@ -22,12 +22,27 @@
         <field name="model">custom.order</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_confirm"
+                            string="Confirm"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+
+                    <button name="action_done"
+                            string="Done"
+                            type="object"
+                            class="btn-success"
+                            invisible="state != 'confirm'"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
                         <field name="customer_name"/>
                         <field name="order_date"/>
-                        <field name="state"/>
+                        <field name="state" readonly="1"/>
                         <field name="amount"/>
                     </group>
                 </sheet>

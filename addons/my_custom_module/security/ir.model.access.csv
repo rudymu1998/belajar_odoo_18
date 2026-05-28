@@ -1,4 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_custom_order,access_custom_order,model_custom_order,,1,1,1,1
-access_custom_item,access_custom_item,model_custom_item,,1,1,1,1
 access_custom_order_line,access_custom_order_line,model_custom_order_line,,1,1,1,1
+
+access_custom_item,access_custom_item,model_custom_item,,1,1,1,1
+access_custom_item_transaction,access_custom_item_transaction,model_custom_item_transaction,,1,0,0,0
