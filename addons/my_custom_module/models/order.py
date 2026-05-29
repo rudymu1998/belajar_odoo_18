@@ -58,7 +58,17 @@ class CustomOrder(models.Model):
             rec.state = 'confirm'
 
     def action_done(self):
-        self.state = 'done'
+
+        for rec in self:
+
+            invoice = self.env['custom.invoice'].create({
+                'name': f"INV-{rec.name}",
+                'order_id': rec.id,
+                'customer_name': rec.customer_name,
+                'amount': rec.amount
+            })
+
+            rec.state = 'done'
 
     @api.depends('line_ids.subtotal')
     def _compute_amount(self):

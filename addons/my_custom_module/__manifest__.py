@@ -7,6 +7,7 @@
         'views/order_views.xml',
         'views/item_views.xml',
         'views/item_transaction_views.xml',
+        'views/invoice_views.xml',
     ],
     'installable': True,
     'application': True,
