@@ -27,7 +27,7 @@
         name="Item Transactions"
         parent="menu_custom_root"
         action="action_item_transaction"
-        sequence="3"
+        sequence="100"
     />
 
 </odoo>

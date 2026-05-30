@@ -16,3 +16,9 @@ class CustomItem(models.Model):
         string="Stock Qty",
         required=True
     )
+
+    transaction_ids = fields.One2many(
+        'custom.item.transaction',
+        'item_id',
+        string="Transactions"
+    )

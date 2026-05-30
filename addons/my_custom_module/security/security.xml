@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Sales Group -->
+    <record id="group_custom_sales" model="res.groups">
+        <field name="name">Custom Sales</field>
+    </record>
+
+    <!-- Finance Group -->
+    <record id="group_custom_finance" model="res.groups">
+        <field name="name">Custom Finance</field>
+    </record>
+
+</odoo>

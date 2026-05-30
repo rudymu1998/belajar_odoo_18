@@ -46,7 +46,8 @@
         name="Invoices"
         parent="menu_custom_root"
         action="action_invoice"
-        sequence="5"
+        groups="my_custom_module.group_custom_finance"
+        sequence="2"
     />
 
 </odoo>

@@ -3,7 +3,9 @@
     'version': '1.0',
     'depends': ['base'],
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
+            
         'views/order_views.xml',
         'views/item_views.xml',
         'views/item_transaction_views.xml',
